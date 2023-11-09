@@ -1,5 +1,15 @@
+import XmasEvent from './XmasEvent.js';
+
 class App {
-  async run() {}
+  #controller;
+
+  constructor() {
+    this.#controller = new XmasEvent();
+  }
+
+  async run() {
+    await this.#controller.startProcess();
+  }
 }
 
 export default App;

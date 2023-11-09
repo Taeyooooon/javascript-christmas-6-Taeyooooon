@@ -1,8 +1,15 @@
 import { Console } from '@woowacourse/mission-utils';
+import { MESSAGE } from './constant/constant.js';
 
 const OutputView = {
+  print(message) {
+    Console.print(message);
+  },
+  printGreeting() {
+    OutputView.print(MESSAGE.greeting);
+  },
   printMenu() {
-    Console.print('<주문 메뉴>');
+    OutputView.print('<주문 메뉴>');
   },
 };
 
