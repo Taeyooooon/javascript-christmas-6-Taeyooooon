@@ -1,14 +1,17 @@
 import InputView from './InputView.js';
 import OutputView from './OutputView.js';
 import { ERROR } from './constant/constant.js';
+import Menu from './model/Menu.js';
 import Validate from './utils/Validate.js';
 
 class XmasEvent {
   #visitDate;
+  #menu;
 
   async startProcess() {
     OutputView.printGreeting();
     await this.#getVisitDate();
+    await this.#getMenuList();
   }
 
   async #getVisitDate() {
@@ -28,8 +31,21 @@ class XmasEvent {
     if (!Validate.isPositiveInteger(date)) {
       throw new Error(ERROR.visitDate);
     }
+
     if (Validate.isInValidDateRange(date)) {
       throw new Error(ERROR.visitDate);
+    }
+  }
+
+  async #getMenuList() {
+    while (true) {
+      const menus = await InputView.readMenu();
+      try {
+        this.#menu = new Menu(menus);
+        break;
+      } catch (error) {
+        OutputView.print(error.message);
+      }
     }
   }
 }

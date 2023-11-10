@@ -7,6 +7,12 @@ const InputView = {
 
     return input;
   },
+
+  async readMenu() {
+    const input = await Console.readLineAsync(PROMPT.menu);
+
+    return input;
+  },
 };
 
 export default InputView;
