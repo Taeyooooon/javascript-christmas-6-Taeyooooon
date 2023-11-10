@@ -21,7 +21,11 @@ class Menu {
     this.#validateCount(count);
   }
 
-  #getCategory(menuName) {
+  getTotalPrice() {
+    return this.#menus.reduce((total, { count, price }) => total + price * count, 0);
+  }
+
+  #getMenuCategory(menuName) {
     const menuCategory = Object.keys(MENU_LIST).find((category) =>
       MENU_LIST[category].some(({ name }) => name === menuName),
     );
@@ -29,10 +33,23 @@ class Menu {
     return menuCategory;
   }
 
+  #getMenuPrice(menuName) {
+    const menu = Object.values(MENU_LIST)
+      .flat()
+      .find((item) => item.name === menuName);
+
+    return menu.price;
+  }
+
   #setMenus(menus) {
     const menuList = menus.split(',').map((each) => each.split('-'));
     menuList.forEach(([menuName, count]) => {
-      const list = { name: menuName, count, category: this.#getCategory(menuName) };
+      const list = {
+        name: menuName,
+        count,
+        category: this.#getMenuCategory(menuName),
+        price: this.#getMenuPrice(menuName),
+      };
       this.#validateDuplicateMenu(menuName);
 
       this.#menus.push(list);

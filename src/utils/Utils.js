@@ -8,6 +8,10 @@ const Utils = {
 
     return Object.freeze(object);
   },
+
+  numberToKoreanWon(number) {
+    return `${number.toLocaleString('ko-KR')}원`;
+  },
 };
 
 export default Utils;
