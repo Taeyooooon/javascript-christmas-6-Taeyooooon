@@ -1,4 +1,4 @@
-import { EVENT_RULES, MENU_LIST } from '../constant/constant.js';
+import { ERROR, EVENT_RULES, MENU_LIST } from '../constant/constant.js';
 import Validate from '../utils/Validate.js';
 
 class Menu {
@@ -33,8 +33,16 @@ class Menu {
     const menuList = menus.split(',').map((each) => each.split('-'));
     menuList.forEach(([menuName, count]) => {
       const list = { name: menuName, count, category: this.#getCategory(menuName) };
+      this.#validateDuplicateMenu(menuName);
+
       this.#menus.push(list);
     });
+  }
+
+  #validateDuplicateMenu(menuName){
+    if (this.#menus.some(({ name }) => name === menuName)) {
+      throw new Error(ERROR.orderDuplicate);
+    }
   }
 
   #validateMenu(menuName) {
@@ -43,17 +51,17 @@ class Menu {
     );
 
     if (!menuCategory) {
-      throw new Error(`[ERROR] 잘못된 메뉴명: "${menuName}"`);
+      throw new Error(ERROR.order);
     }
   }
 
   #validateCount(count) {
     if (!Validate.isPositiveInteger(count)) {
-      throw new Error('[ERROR] 숫자만 입력');
+      throw new Error(ERROR.order);
     }
 
     if (Number(count) > EVENT_RULES.maxOrder) {
-      throw new Error('[ERROR] 최대 20개까지 주문가능');
+      throw new Error(ERROR.order);
     }
   }
 }
