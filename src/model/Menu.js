@@ -39,7 +39,7 @@ class Menu {
     });
   }
 
-  #validateDuplicateMenu(menuName){
+  #validateDuplicateMenu(menuName) {
     if (this.#menus.some(({ name }) => name === menuName)) {
       throw new Error(ERROR.orderDuplicate);
     }
@@ -63,6 +63,10 @@ class Menu {
     if (Number(count) > EVENT_RULES.maxOrder) {
       throw new Error(ERROR.order);
     }
+  }
+
+  getMenu() {
+    return this.#menus;
   }
 }
 
