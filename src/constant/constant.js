@@ -1,3 +1,5 @@
+import Utils from '../utils/Utils.js';
+
 export const MESSAGE = Object.freeze({
   greeting: '안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.',
 });
@@ -22,7 +24,7 @@ export const EVENT_RULES = Object.freeze({
   maxOrder: 20,
 });
 
-export const MENU_LIST = Object.freeze({
+export const MENU_LIST = Utils.deepFreeze({
   appetizer: [
     { name: '양송이수프', price: 6000 },
     { name: '타파스', price: 5500 },
