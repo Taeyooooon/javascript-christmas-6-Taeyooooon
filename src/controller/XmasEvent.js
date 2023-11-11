@@ -66,6 +66,7 @@ class XmasEvent {
     this.#printDiscountDetail();
     this.#printTotalDiscountPrice();
     this.#printExpectedPrice();
+    this.#printEventBadge();
   }
 
   #printHeader() {
@@ -73,7 +74,7 @@ class XmasEvent {
   }
 
   #printOrderedMenu() {
-    OutputView.print('\n<주문메뉴>');
+    OutputView.print('\n<주문 메뉴>');
     this.#menu.getMenu().forEach(({ name, count }) => {
       OutputView.print(`${name} ${count}개`);
     });
@@ -110,8 +111,13 @@ class XmasEvent {
   }
 
   #printExpectedPrice() {
-    OutputView.print('\n<할인 후 에상 결제 금액>');
+    OutputView.print('\n<할인 후 예상 결제 금액>');
     OutputView.print(Utils.numberToKoreanWon(this.#eventResult.getExpectedPrice()));
+  }
+
+  #printEventBadge() {
+    OutputView.print('\n<12월 이벤트 배지>');
+    OutputView.print(this.#eventResult.getEventBadge());
   }
 }
 

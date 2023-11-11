@@ -71,6 +71,21 @@ class Event {
     return mainDiscount;
   }
 
+  getEventBadge() {
+    const totalDiscountPrice = this.getTotalDiscountPrice();
+
+    if (totalDiscountPrice >= 20000) {
+      return '산타';
+    }
+    if (totalDiscountPrice >= 20000) {
+      return '트리';
+    }
+    if (totalDiscountPrice >= 20000) {
+      return '별';
+    }
+    return '없음';
+  }
+
   getSpecialDiscount() {
     if (EVENT_RULES.specialDay.includes(this.#visitDate)) {
       return EVENT_RULES.specialDiscount;
