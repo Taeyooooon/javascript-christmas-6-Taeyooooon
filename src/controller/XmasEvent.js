@@ -65,6 +65,7 @@ class XmasEvent {
     this.#printGiveAway();
     this.#printDiscountDetail();
     this.#printTotalDiscountPrice();
+    this.#printExpectedPrice();
   }
 
   #printHeader() {
@@ -100,6 +101,11 @@ class XmasEvent {
   #printTotalDiscountPrice() {
     OutputView.print('\n<총혜택 금액>');
     OutputView.print(`-${Utils.numberToKoreanWon(this.#eventResult.getTotalDiscountPrice())}`);
+  }
+
+  #printExpectedPrice() {
+    OutputView.print('\n<할인 후 에상 결제 금액>');
+    OutputView.print(Utils.numberToKoreanWon(this.#eventResult.getExpectedPrice()));
   }
 }
 
