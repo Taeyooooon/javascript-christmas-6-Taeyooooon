@@ -69,7 +69,7 @@ class XmasEvent {
   }
 
   #printHeader() {
-    OutputView.print('12월 3일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!');
+    OutputView.print(`12월 ${this.#visitDate}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!`);
   }
 
   #printOrderedMenu() {
@@ -91,6 +91,11 @@ class XmasEvent {
 
   #printDiscountDetail() {
     OutputView.print('\n<혜택 내역>');
+    if (this.#eventResult.isZeroDiscount) {
+      OutputView.print('없음');
+      return;
+    }
+
     this.#eventResult.getEventBenefits().forEach(({ eventName, discountValue }) => {
       if (discountValue) {
         OutputView.print(`${eventName}: -${Utils.numberToKoreanWon(discountValue)}`);
@@ -99,8 +104,9 @@ class XmasEvent {
   }
 
   #printTotalDiscountPrice() {
+    const totalDiscountPrice = this.#eventResult.getTotalDiscountPrice();
     OutputView.print('\n<총혜택 금액>');
-    OutputView.print(`-${Utils.numberToKoreanWon(this.#eventResult.getTotalDiscountPrice())}`);
+    OutputView.print(`${totalDiscountPrice ? `-${Utils.numberToKoreanWon(totalDiscountPrice)}` : '없음'}`);
   }
 
   #printExpectedPrice() {

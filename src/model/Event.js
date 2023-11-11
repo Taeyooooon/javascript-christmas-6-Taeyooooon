@@ -26,6 +26,10 @@ class Event {
     return this.#eventBenefits;
   }
 
+  get isZeroDiscount() {
+    return this.#eventBenefits.every(({ discountValue }) => discountValue === 0);
+  }
+
   getTotalDiscountPrice() {
     return this.#eventBenefits.reduce((total, { discountValue }) => total + discountValue, 0);
   }
