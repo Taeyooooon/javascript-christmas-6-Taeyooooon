@@ -89,6 +89,11 @@ class XmasEvent {
 
   #printDiscountDetail() {
     OutputView.print('\n<혜택 내역>');
+    this.#eventResult.getEventBenefits().forEach(({ eventName, discountValue }) => {
+      if (discountValue) {
+        OutputView.print(`${eventName}: -${Utils.numberToKoreanWon(discountValue)}`);
+      }
+    });
   }
 }
 

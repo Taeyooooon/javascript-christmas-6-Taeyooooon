@@ -22,6 +22,10 @@ class Event {
     ];
   }
 
+  getEventBenefits() {
+    return this.#eventBenefits;
+  }
+
   getTotalDiscountPrice() {
     return this.#eventBenefits.reduce((total, { discountValue }) => total + discountValue, 0);
   }
