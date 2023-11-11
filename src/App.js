@@ -1,4 +1,4 @@
-import XmasEvent from './XmasEvent.js';
+import XmasEvent from './controller/XmasEvent.js';
 
 class App {
   #controller;

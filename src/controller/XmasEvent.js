@@ -1,9 +1,9 @@
-import InputView from './InputView.js';
-import OutputView from './OutputView.js';
-import { ERROR } from './constant/constant.js';
-import Menu from './model/Menu.js';
-import Utils from './utils/Utils.js';
-import Validate from './utils/Validate.js';
+import InputView from '../InputView.js';
+import OutputView from '../OutputView.js';
+import { ERROR } from '../constant/constant.js';
+import Menu from '../model/Menu.js';
+import Utils from '../utils/Utils.js';
+import Validate from '../utils/Validate.js';
 
 class XmasEvent {
   #visitDate;
@@ -55,6 +55,7 @@ class XmasEvent {
     this.#printHeader();
     this.#printOrderedMenu();
     this.#printTotalPriceBeforeSale();
+    this.#printGiveAway();
   }
 
   #printHeader() {
@@ -71,6 +72,11 @@ class XmasEvent {
   #printTotalPriceBeforeSale() {
     OutputView.print('\n<할인 전 총주문 금액>');
     OutputView.print(Utils.numberToKoreanWon(this.#menu.getTotalPrice()));
+  }
+
+  #printGiveAway() {
+    OutputView.print('\n<증정 메뉴>');
+    OutputView.print(this.#menu.getTotalPrice() > 120000 ? '샴페인 1개' : '없음');
   }
 }
 
