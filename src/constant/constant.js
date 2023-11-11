@@ -13,7 +13,7 @@ export const ERROR_PREFIX = '[ERROR]';
 
 export const ERROR = {
   visitDate: `${ERROR_PREFIX} 유효하지 않은 날짜입니다. 다시 입력해 주세요.`,
-  order : `${ERROR_PREFIX} 유효하지 않은 주문입니다. 다시 입력해 주세요.`
+  order: `${ERROR_PREFIX} 유효하지 않은 주문입니다. 다시 입력해 주세요.`,
 };
 
 export const VALID_DATE_RANGE = Object.freeze({
@@ -21,8 +21,16 @@ export const VALID_DATE_RANGE = Object.freeze({
   max: 31,
 });
 
-export const EVENT_RULES = Object.freeze({
+export const EVENT_RULES = Utils.deepFreeze({
   maxOrder: 20,
+  specialDay: ['3', '10', '17', '24', '25', '31'],
+  xmasDiscountStartPrice: 1000,
+  xmasDiscountPerDay: 100,
+  weekdayDiscount: 2023,
+  weekendDiscount: 2023,
+  specialDiscount: 1000,
+  giveAwayRequiredPrice: 120000,
+  giveAwayPrice: 25000,
 });
 
 export const MENU_LIST = Utils.deepFreeze({

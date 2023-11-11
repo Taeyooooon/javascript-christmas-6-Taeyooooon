@@ -1,6 +1,7 @@
 import InputView from '../InputView.js';
 import OutputView from '../OutputView.js';
 import { ERROR } from '../constant/constant.js';
+import Event from '../model/Event.js';
 import Menu from '../model/Menu.js';
 import Utils from '../utils/Utils.js';
 import Validate from '../utils/Validate.js';
@@ -8,11 +9,13 @@ import Validate from '../utils/Validate.js';
 class XmasEvent {
   #visitDate;
   #menu;
+  #eventResult;
 
   async startProcess() {
     OutputView.printGreeting();
     await this.#getVisitDate();
     await this.#getMenuList();
+    this.#setEventResult();
     this.#printResult();
   }
 
@@ -51,11 +54,16 @@ class XmasEvent {
     }
   }
 
+  #setEventResult() {
+    this.#eventResult = new Event(this.#visitDate, this.#menu);
+  }
+
   #printResult() {
     this.#printHeader();
     this.#printOrderedMenu();
-    this.#printTotalPriceBeforeSale();
+    this.#printTotalPriceBeforeDiscount();
     this.#printGiveAway();
+    this.#printDiscountDetail();
   }
 
   #printHeader() {
@@ -69,14 +77,18 @@ class XmasEvent {
     });
   }
 
-  #printTotalPriceBeforeSale() {
+  #printTotalPriceBeforeDiscount() {
     OutputView.print('\n<할인 전 총주문 금액>');
     OutputView.print(Utils.numberToKoreanWon(this.#menu.getTotalPrice()));
   }
 
   #printGiveAway() {
     OutputView.print('\n<증정 메뉴>');
-    OutputView.print(this.#menu.getTotalPrice() > 120000 ? '샴페인 1개' : '없음');
+    OutputView.print(this.#eventResult.hasGiveAway() ? '샴페인 1개' : '없음');
+  }
+
+  #printDiscountDetail() {
+    OutputView.print('\n<혜택 내역>');
   }
 }
 
