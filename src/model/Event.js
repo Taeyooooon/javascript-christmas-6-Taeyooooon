@@ -77,10 +77,10 @@ class Event {
     if (totalDiscountPrice >= 20000) {
       return '산타';
     }
-    if (totalDiscountPrice >= 20000) {
+    if (totalDiscountPrice >= 10000) {
       return '트리';
     }
-    if (totalDiscountPrice >= 20000) {
+    if (totalDiscountPrice >= 5000) {
       return '별';
     }
     return '없음';

@@ -21,6 +21,9 @@ const Utils = {
     return dayOfWeek;
   },
 
+  /**
+   * @returns '주말' | '평일'
+   */
   getWeekdayOrWeekend(day, month = 12, year = 2023) {
     const dayOfWeek = Utils.getDayOfWeek(day, month, year);
     if (dayOfWeek === '금' || dayOfWeek === '토') {
