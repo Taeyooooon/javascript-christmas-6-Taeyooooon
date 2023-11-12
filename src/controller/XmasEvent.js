@@ -3,7 +3,6 @@ import OutputView from '../OutputView.js';
 import { ERROR } from '../constant/constant.js';
 import Event from '../model/Event.js';
 import Menu from '../model/Menu.js';
-import Utils from '../utils/Utils.js';
 import Validate from '../utils/Validate.js';
 
 class XmasEvent {
@@ -59,65 +58,14 @@ class XmasEvent {
   }
 
   #printResult() {
-    this.#printHeader();
-    this.#printOrderedMenu();
-    this.#printTotalPriceBeforeDiscount();
-    this.#printGiveAway();
-    this.#printDiscountDetail();
-    this.#printTotalDiscountPrice();
-    this.#printExpectedPrice();
-    this.#printEventBadge();
-  }
-
-  #printHeader() {
-    OutputView.print(`12월 ${this.#visitDate}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!`);
-  }
-
-  #printOrderedMenu() {
-    OutputView.print('\n<주문 메뉴>');
-    this.#menu.getMenu().forEach(({ name, count }) => {
-      OutputView.print(`${name} ${count}개`);
-    });
-  }
-
-  #printTotalPriceBeforeDiscount() {
-    OutputView.print('\n<할인 전 총주문 금액>');
-    OutputView.print(Utils.numberToKoreanWon(this.#menu.getTotalPrice()));
-  }
-
-  #printGiveAway() {
-    OutputView.print('\n<증정 메뉴>');
-    OutputView.print(this.#eventResult.hasGiveAway() ? '샴페인 1개' : '없음');
-  }
-
-  #printDiscountDetail() {
-    OutputView.print('\n<혜택 내역>');
-    if (this.#eventResult.isZeroDiscount) {
-      OutputView.print('없음');
-      return;
-    }
-
-    this.#eventResult.getEventBenefits().forEach(({ eventName, discountValue }) => {
-      if (discountValue) {
-        OutputView.print(`${eventName}: -${Utils.numberToKoreanWon(discountValue)}`);
-      }
-    });
-  }
-
-  #printTotalDiscountPrice() {
-    const totalDiscountPrice = this.#eventResult.getTotalDiscountPrice();
-    OutputView.print('\n<총혜택 금액>');
-    OutputView.print(`${totalDiscountPrice ? `-${Utils.numberToKoreanWon(totalDiscountPrice)}` : '없음'}`);
-  }
-
-  #printExpectedPrice() {
-    OutputView.print('\n<할인 후 예상 결제 금액>');
-    OutputView.print(Utils.numberToKoreanWon(this.#eventResult.getExpectedPrice()));
-  }
-
-  #printEventBadge() {
-    OutputView.print('\n<12월 이벤트 배지>');
-    OutputView.print(this.#eventResult.getEventBadge());
+    OutputView.printHeader(this.#visitDate);
+    OutputView.printOrderedMenu(this.#menu.getMenu());
+    OutputView.printTotalPriceBeforeDiscount(this.#menu.getTotalPrice());
+    OutputView.printGiveAway(this.#eventResult.hasGiveAway());
+    OutputView.printDiscountDetail(this.#eventResult);
+    OutputView.printTotalDiscountPrice(this.#eventResult.getTotalDiscountPrice());
+    OutputView.printExpectedPrice(this.#eventResult.getExpectedPrice());
+    OutputView.printEventBadge(this.#eventResult.getEventBadge());
   }
 }
 
