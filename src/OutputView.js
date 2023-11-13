@@ -15,9 +15,9 @@ const OutputView = {
     OutputView.print(`12월 ${visitDate}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!`);
   },
 
-  printOrderedMenu(menu) {
+  printOrderedMenuList(menuList) {
     OutputView.print('\n<주문 메뉴>');
-    menu.forEach(({ name, count }) => {
+    menuList.forEach(({ name, count }) => {
       OutputView.print(`${name} ${count}개`);
     });
   },
@@ -39,7 +39,7 @@ const OutputView = {
       return;
     }
 
-    eventResult.getEventBenefits().forEach(({ eventName, discountValue }) => {
+    eventResult.eventBenefits.forEach(({ eventName, discountValue }) => {
       if (discountValue) {
         OutputView.print(`${eventName}: -${Utils.numberToKoreanWon(discountValue)}`);
       }

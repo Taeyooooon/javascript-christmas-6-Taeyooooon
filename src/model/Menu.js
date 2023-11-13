@@ -2,7 +2,7 @@ import { ERROR, EVENT_RULES, MENU_LIST } from '../constant/constant.js';
 import Validate from '../utils/Validate.js';
 
 class Menu {
-  #menus = [];
+  #menuList = [];
   #totalCount = 0;
 
   constructor(menus) {
@@ -21,8 +21,8 @@ class Menu {
     this.#validateCount(count);
   }
 
-  getTotalPrice() {
-    return this.#menus.reduce((total, { count, price }) => total + price * count, 0);
+  get totalPrice() {
+    return this.#menuList.reduce((total, { count, price }) => total + price * count, 0);
   }
 
   #getMenuCategory(menuName) {
@@ -52,12 +52,12 @@ class Menu {
       };
       this.#validateDuplicateMenu(menuName);
 
-      this.#menus.push(list);
+      this.#menuList.push(list);
     });
   }
 
   #validateDuplicateMenu(menuName) {
-    if (this.#menus.some(({ name }) => name === menuName)) {
+    if (this.#menuList.some(({ name }) => name === menuName)) {
       throw new Error(ERROR.orderDuplicate);
     }
   }
@@ -82,8 +82,8 @@ class Menu {
     }
   }
 
-  getMenu() {
-    return this.#menus;
+  get menuList() {
+    return this.#menuList;
   }
 }
 

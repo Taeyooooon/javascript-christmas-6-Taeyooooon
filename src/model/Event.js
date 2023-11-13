@@ -9,20 +9,20 @@ class Event {
   constructor(visitDate, orderedMenu) {
     this.#visitDate = visitDate;
     this.#orderedMenu = orderedMenu;
-    this.setEventBenefits();
+    this.#setEventBenefits();
   }
 
-  setEventBenefits() {
+  #setEventBenefits() {
     this.#eventBenefits = [
-      { eventName: '크리스마스 디데이 할인', discountValue: this.getXmasDdayDiscount() },
-      { eventName: '평일 할인', discountValue: this.getWeekdayDiscount() },
-      { eventName: '주말 할인', discountValue: this.getWeekendDiscount() },
-      { eventName: '특별 할인', discountValue: this.getSpecialDiscount() },
-      { eventName: '증정 이벤트', discountValue: this.hasGiveAway() ? EVENT_RULES.giveAwayPrice : 0 },
+      { eventName: '크리스마스 디데이 할인', discountValue: this.xmasDdayDiscount },
+      { eventName: '평일 할인', discountValue: this.weekdayDiscount },
+      { eventName: '주말 할인', discountValue: this.weekendDiscount },
+      { eventName: '특별 할인', discountValue: this.#specialDiscount },
+      { eventName: '증정 이벤트', discountValue: this.hasGiveAway ? EVENT_RULES.giveAwayPrice : 0 },
     ];
   }
 
-  getEventBenefits() {
+  get eventBenefits() {
     return this.#eventBenefits;
   }
 
@@ -30,63 +30,61 @@ class Event {
     return this.#eventBenefits.every(({ discountValue }) => discountValue === 0);
   }
 
-  getTotalDiscountPrice() {
+  get totalDiscountPrice() {
     return this.#eventBenefits.reduce((total, { discountValue }) => total + discountValue, 0);
   }
 
-  getExpectedPrice() {
-    const totalOrderPrice = this.#orderedMenu.getTotalPrice();
-    const totalDiscount = this.getTotalDiscountPrice();
+  get expectedPrice() {
+    const totalOrderPrice = this.#orderedMenu.totalPrice;
+    const totalDiscount = this.totalDiscountPrice;
 
     const giveAwayDiscount = this.#eventBenefits.find(({ eventName }) => eventName === '증정 이벤트').discountValue;
 
     return totalOrderPrice - (totalDiscount - giveAwayDiscount);
   }
 
-  getXmasDdayDiscount() {
+  get xmasDdayDiscount() {
     if (this.#visitDate > 25) return 0;
 
     return EVENT_RULES.xmasDiscountStartPrice + (this.#visitDate - 1) * EVENT_RULES.xmasDiscountPerDay;
   }
 
-  getWeekdayDiscount() {
+  get weekdayDiscount() {
     if (Utils.getWeekdayOrWeekend(this.#visitDate) !== '평일') {
       return 0;
     }
 
-    const dessertMenus = this.#orderedMenu.getMenu().filter(({ category }) => category === 'dessert');
+    const dessertMenus = this.#orderedMenu.menuList.filter(({ category }) => category === 'dessert');
     const dessertDiscount = dessertMenus.reduce((total, { count }) => total + count * EVENT_RULES.weekdayDiscount, 0);
 
     return dessertDiscount;
   }
 
-  getWeekendDiscount() {
+  get weekendDiscount() {
     if (Utils.getWeekdayOrWeekend(this.#visitDate) !== '주말') {
       return 0;
     }
 
-    const mainMenus = this.#orderedMenu.getMenu().filter(({ category }) => category === 'main');
+    const mainMenus = this.#orderedMenu.menuList.filter(({ category }) => category === 'main');
     const mainDiscount = mainMenus.length * EVENT_RULES.weekendDiscount;
 
     return mainDiscount;
   }
 
-  getEventBadge() {
-    const totalDiscountPrice = this.getTotalDiscountPrice();
-
-    if (totalDiscountPrice >= 20000) {
+  get eventBadge() {
+    if (this.totalDiscountPrice >= 20000) {
       return '산타';
     }
-    if (totalDiscountPrice >= 10000) {
+    if (this.totalDiscountPrice >= 10000) {
       return '트리';
     }
-    if (totalDiscountPrice >= 5000) {
+    if (this.totalDiscountPrice >= 5000) {
       return '별';
     }
     return '없음';
   }
 
-  getSpecialDiscount() {
+  get #specialDiscount() {
     if (EVENT_RULES.specialDay.includes(this.#visitDate)) {
       return EVENT_RULES.specialDiscount;
     }
@@ -94,8 +92,8 @@ class Event {
     return 0;
   }
 
-  hasGiveAway() {
-    return this.#orderedMenu.getTotalPrice() > EVENT_RULES.giveAwayRequiredPrice;
+  get hasGiveAway() {
+    return this.#orderedMenu.totalPrice > EVENT_RULES.giveAwayRequiredPrice;
   }
 }
 
