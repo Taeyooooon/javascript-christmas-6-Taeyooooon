@@ -29,6 +29,7 @@ describe('Menu 클래스 테스트', () => {
       { menuInput: '레드와인-1,초코케이크-1,초코케이크-1', expectedError: ERROR.orderDuplicate },
       { menuInput: '레드와인-1,제로콜라-10', expectedError: ERROR.onlyBeverage },
       { menuInput: '레드와인-999,티본스테이크-10', expectedError: ERROR.order },
+      { menuInput: '레드와인-15,티본스테이크-15', expectedError: ERROR.order },
     ];
 
     test.each(testCases)(

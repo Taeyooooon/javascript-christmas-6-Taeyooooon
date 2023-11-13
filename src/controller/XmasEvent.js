@@ -12,13 +12,13 @@ class XmasEvent {
 
   async startProcess() {
     OutputView.printGreeting();
-    await this.#getVisitDate();
-    await this.#getMenuList();
+    await this.#setVisitDate();
+    await this.#setMenuList();
     this.#setEventResult();
     this.#printResult();
   }
 
-  async #getVisitDate() {
+  async #setVisitDate() {
     while (true) {
       const date = await InputView.readDate();
       try {
@@ -41,7 +41,7 @@ class XmasEvent {
     }
   }
 
-  async #getMenuList() {
+  async #setMenuList() {
     while (true) {
       const menus = await InputView.readMenu();
       try {
