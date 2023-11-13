@@ -7,6 +7,7 @@ class Menu {
   constructor(menus) {
     this.#validate(menus);
     this.#setMenus(menus);
+    this.#validateIsOnlyBeverage();
     this.#validateTotalCount();
   }
 
@@ -51,7 +52,6 @@ class Menu {
         price: this.#getMenuPrice(menuName),
       };
       this.#validateDuplicateMenu(menuName);
-
       this.#menuList.push(list);
     });
   }
@@ -75,6 +75,13 @@ class Menu {
   #validateDuplicateMenu(menuName) {
     if (this.#menuList.some(({ name }) => name === menuName)) {
       throw new Error(ERROR.orderDuplicate);
+    }
+  }
+
+  #validateIsOnlyBeverage() {
+    const isOnlyBeverage = this.#menuList.every(({ category }) => category === 'beverage');
+    if (isOnlyBeverage) {
+      throw new Error(ERROR.onlyBeverage);
     }
   }
 
