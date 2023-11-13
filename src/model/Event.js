@@ -13,6 +13,8 @@ class Event {
   }
 
   #setEventBenefits() {
+    if (this.#orderedMenu.totalPrice < EVENT_RULES.minPriceForEvent) return;
+
     this.#eventBenefits = [
       { eventName: '크리스마스 디데이 할인', discountValue: this.xmasDdayDiscount },
       { eventName: '평일 할인', discountValue: this.weekdayDiscount },
@@ -38,7 +40,8 @@ class Event {
     const totalOrderPrice = this.#orderedMenu.totalPrice;
     const totalDiscount = this.totalDiscountPrice;
 
-    const giveAwayDiscount = this.#eventBenefits.find(({ eventName }) => eventName === '증정 이벤트').discountValue;
+    const giveAwayDiscount =
+      this.#eventBenefits.find(({ eventName }) => eventName === '증정 이벤트')?.discountValue || 0;
 
     return totalOrderPrice - (totalDiscount - giveAwayDiscount);
   }

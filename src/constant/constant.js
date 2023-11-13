@@ -11,12 +11,12 @@ export const PROMPT = Object.freeze({
 
 export const ERROR_PREFIX = '[ERROR]';
 
-export const ERROR = {
+export const ERROR = Object.freeze({
   visitDate: `${ERROR_PREFIX} 유효하지 않은 날짜입니다. 다시 입력해 주세요.`,
   order: `${ERROR_PREFIX} 유효하지 않은 주문입니다. 다시 입력해 주세요.`,
   orderDuplicate: `${ERROR_PREFIX} 유효하지 않은 주문입니다. 다시 입력해 주세요.`,
   onlyBeverage: `${ERROR_PREFIX} 유효하지 않은 주문입니다. 다시 입력해 주세요.`,
-};
+});
 
 export const VALID_DATE_RANGE = Object.freeze({
   min: 1,
@@ -33,6 +33,7 @@ export const EVENT_RULES = Utils.deepFreeze({
   specialDiscount: 1000,
   giveAwayRequiredPrice: 120000,
   giveAwayPrice: 25000,
+  minPriceForEvent: 10000,
 });
 
 export const MENU_LIST = Utils.deepFreeze({
