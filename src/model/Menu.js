@@ -93,11 +93,11 @@ class Menu {
     }
   }
 
-  get totalPrice() {
+  getTotalPrice() {
     return this.#menuList.reduce((total, { count, price }) => total + price * count, 0);
   }
 
-  get menuList() {
+  getMenuList() {
     return this.#menuList;
   }
 }

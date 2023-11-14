@@ -59,13 +59,13 @@ class XmasEvent {
 
   #printResult() {
     OutputView.printHeader(this.#visitDate);
-    OutputView.printOrderedMenuList(this.#menu.menuList);
-    OutputView.printTotalPriceBeforeDiscount(this.#menu.totalPrice);
-    OutputView.printGiveAway(this.#eventResult.hasGiveAway);
+    OutputView.printOrderedMenuList(this.#menu.getMenuList());
+    OutputView.printTotalPriceBeforeDiscount(this.#menu.getTotalPrice());
+    OutputView.printGiveAway(this.#eventResult.getHasGiveAway());
     OutputView.printDiscountDetail(this.#eventResult);
-    OutputView.printTotalDiscountPrice(this.#eventResult.totalDiscountPrice);
-    OutputView.printExpectedPrice(this.#eventResult.expectedPrice);
-    OutputView.printEventBadge(this.#eventResult.eventBadge);
+    OutputView.printTotalDiscountPrice(this.#eventResult.getTotalDiscountPrice());
+    OutputView.printExpectedPrice(this.#eventResult.getExpectedPrice());
+    OutputView.printEventBadge(this.#eventResult.getEventBadge());
   }
 }
 

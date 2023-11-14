@@ -13,11 +13,11 @@ describe('Menu 클래스 테스트', () => {
     const expectedTotalPrice = 145000;
 
     test('메뉴 리스트를 반환한다.', () => {
-      expect(menu.menuList).toEqual(expectedList);
+      expect(menu.getMenuList()).toEqual(expectedList);
     });
 
     test('메뉴 총 가격을 반환한다.', () => {
-      expect(menu.totalPrice).toBe(expectedTotalPrice);
+      expect(menu.getTotalPrice()).toBe(expectedTotalPrice);
     });
   });
 

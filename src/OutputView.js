@@ -34,12 +34,12 @@ const OutputView = {
 
   printDiscountDetail(eventResult) {
     OutputView.print('\n<혜택 내역>');
-    if (eventResult.isZeroDiscount) {
+    if (eventResult.getIsZeroDiscount()) {
       OutputView.print('없음');
       return;
     }
 
-    eventResult.eventBenefits.forEach(({ eventName, discountValue }) => {
+    eventResult.getEventBenefits().forEach(({ eventName, discountValue }) => {
       if (discountValue) {
         OutputView.print(`${eventName}: -${Utils.numberToKoreanWon(discountValue)}`);
       }
@@ -56,10 +56,10 @@ const OutputView = {
     OutputView.print(Utils.numberToKoreanWon(expectedPrice));
   },
 
-  printEventBadge(eventBadge){
+  printEventBadge(eventBadge) {
     OutputView.print('\n<12월 이벤트 배지>');
     OutputView.print(eventBadge);
-  }
+  },
 };
 
 export default OutputView;
