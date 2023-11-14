@@ -43,8 +43,8 @@ class Menu {
   }
 
   #setMenus(menus) {
-    const menuList = menus.split(',').map((each) => each.split('-'));
-    menuList.forEach(([menuName, count]) => {
+    menus.split(',').forEach((eachMenu) => {
+      const [menuName, count] = eachMenu.split('-');
       const list = {
         name: menuName,
         count: Number(count),
