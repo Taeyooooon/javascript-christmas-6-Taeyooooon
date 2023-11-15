@@ -1,6 +1,6 @@
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
-import { ERROR } from '../constant/constant.js';
+
 import Event from '../model/Event.js';
 import Menu from '../model/Menu.js';
 import Validate from '../utils/Validate.js';
@@ -22,22 +22,12 @@ class XmasEvent {
     while (true) {
       const date = await InputView.readDate();
       try {
-        this.#validateDate(date);
+        Validate.checkDate(date);
         this.#visitDate = date;
         break;
       } catch (error) {
         OutputView.print(error.message);
       }
-    }
-  }
-
-  #validateDate(date) {
-    if (!Validate.isPositiveInteger(date)) {
-      throw new Error(ERROR.visitDate);
-    }
-
-    if (Validate.isInValidDateRange(date)) {
-      throw new Error(ERROR.visitDate);
     }
   }
 
