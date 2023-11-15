@@ -78,4 +78,48 @@ describe('Event 클래스 테스트', () => {
       expect(event.getHasGiveAway()).toBe(true);
     });
   });
+
+  describe('이벤트 뱃지 테스트', () => {
+    const visitDate = '26';
+    const orderedMenu = new Menu('타파스-1,제로콜라-1');
+    const event = new Event(visitDate, orderedMenu);
+
+    test('산타를 반환한다 ', () => {
+      jest.spyOn(event, 'getTotalDiscountPrice').mockReturnValue(20000);
+      expect(event.getEventBadge()).toBe('산타');
+    });
+
+    test('트리를 반환한다 ', () => {
+      jest.spyOn(event, 'getTotalDiscountPrice').mockReturnValue(10000);
+      expect(event.getEventBadge()).toBe('트리');
+    });
+
+    test('별을 반환한다 ', () => {
+      jest.spyOn(event, 'getTotalDiscountPrice').mockReturnValue(5000);
+      expect(event.getEventBadge()).toBe('별');
+    });
+
+    test('없음을 반환한다 ', () => {
+      jest.spyOn(event, 'getTotalDiscountPrice').mockReturnValue(1000);
+      expect(event.getEventBadge()).toBe('없음');
+    });
+  });
+
+  describe('getXmasDdayDiscount 테스트', () => {
+    test('26일~ 이후 크리스마스 디데이 이벤트를 적용하지 않는다.', () => {
+      const visitDate = '26';
+      const orderedMenu = new Menu('타파스-1,제로콜라-1');
+      const event = new Event(visitDate, orderedMenu);
+
+      expect(event.getXmasDdayDiscount()).toBe(0);
+    });
+
+    test('1~25일까지 크리스마스 디데이 이벤트를 적용한다', () => {
+      const visitDate = '1';
+      const orderedMenu = new Menu('타파스-1,제로콜라-1');
+      const event = new Event(visitDate, orderedMenu);
+
+      expect(event.getXmasDdayDiscount()).toBe(1000);
+    });
+  });
 });
