@@ -21,7 +21,7 @@ describe('Menu 클래스 테스트', () => {
     });
   });
 
-  describe('요효성 검사 실패 테스트', () => {
+  describe('유효성 검사 실패 테스트', () => {
     const testCases = [
       { menuInput: '존재하지않는메뉴-10', expectedError: ERROR.order },
       { menuInput: '레드와인-10,초코케이크-abc', expectedError: ERROR.order },
