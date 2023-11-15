@@ -26,35 +26,46 @@ export const VALID_DATE_RANGE = Object.freeze({
 export const EVENT_RULES = Utils.deepFreeze({
   maxOrder: 20,
   specialDay: ['3', '10', '17', '24', '25', '31'],
-  xmasDiscountStartPrice: 1000,
+  xmasDiscountStartPrice: 1_000,
   xmasDiscountPerDay: 100,
-  weekdayDiscount: 2023,
-  weekendDiscount: 2023,
-  specialDiscount: 1000,
-  giveAwayRequiredPrice: 120000,
-  giveAwayPrice: 25000,
-  minPriceForEvent: 10000,
+  weekdayDiscount: 2_023,
+  weekendDiscount: 2_023,
+  specialDiscount: 1_000,
+  giveAwayRequiredPrice: 120_000,
+  giveAwayPrice: 25_000,
+  minPriceForEvent: 10_000,
+});
+
+export const EVENT_BADGE = Object.freeze({
+  santa: 20_000,
+  tree: 10_000,
+  star: 5_000,
 });
 
 export const MENU_LIST = Utils.deepFreeze({
   appetizer: [
-    { name: '양송이수프', price: 6000 },
-    { name: '타파스', price: 5500 },
-    { name: '시저샐러드', price: 8000 },
+    { name: '양송이수프', price: 6_000 },
+    { name: '타파스', price: 5_500 },
+    { name: '시저샐러드', price: 8_000 },
   ],
   main: [
-    { name: '티본스테이크', price: 55000 },
-    { name: '바비큐립', price: 54000 },
-    { name: '해산물파스타', price: 35000 },
-    { name: '크리스마스파스타', price: 25000 },
+    { name: '티본스테이크', price: 55_000 },
+    { name: '바비큐립', price: 54_000 },
+    { name: '해산물파스타', price: 35_000 },
+    { name: '크리스마스파스타', price: 25_000 },
   ],
   dessert: [
-    { name: '초코케이크', price: 15000 },
-    { name: '아이스크림', price: 5000 },
+    { name: '초코케이크', price: 15_000 },
+    { name: '아이스크림', price: 5_000 },
   ],
   beverage: [
-    { name: '제로콜라', price: 3000 },
-    { name: '레드와인', price: 60000 },
-    { name: '샴페인', price: 25000 },
+    { name: '제로콜라', price: 3_000 },
+    { name: '레드와인', price: 60_000 },
+    { name: '샴페인', price: 25_000 },
   ],
+});
+
+export const SYMBOL = Object.freeze({
+  menuDivider: ',',
+  menuNameAndCountDivider: '-',
 });

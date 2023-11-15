@@ -1,4 +1,4 @@
-import { ERROR, EVENT_RULES, MENU_LIST } from '../constant/constant.js';
+import { ERROR, EVENT_RULES, MENU_LIST, SYMBOL } from '../constant/constant.js';
 import Validate from '../utils/Validate.js';
 
 class Menu {
@@ -12,12 +12,12 @@ class Menu {
   }
 
   #validate(menus) {
-    const eachMenuAndCount = menus.split(',');
+    const eachMenuAndCount = menus.split(SYMBOL.menuDivider);
     eachMenuAndCount.forEach((each) => this.#validateEach(each));
   }
 
   #validateEach(menu) {
-    const [menuName, count] = menu.split('-');
+    const [menuName, count] = menu.split(SYMBOL.menuNameAndCountDivider);
     this.#validateMenu(menuName);
     this.#validateCount(count);
   }
@@ -43,14 +43,16 @@ class Menu {
   }
 
   #setMenus(menus) {
-    menus.split(',').forEach((eachMenu) => {
-      const [menuName, count] = eachMenu.split('-');
+    menus.split(SYMBOL.menuDivider).forEach((eachMenu) => {
+      const [menuName, count] = eachMenu.split(SYMBOL.menuNameAndCountDivider);
+      
       const list = {
         name: menuName,
         count: Number(count),
         category: this.#getMenuCategory(menuName),
         price: this.#getMenuPrice(menuName),
       };
+
       this.#validateDuplicateMenu(menuName);
       this.#menuList.push(list);
     });
@@ -67,7 +69,7 @@ class Menu {
   #getMenuPrice(menuName) {
     const menu = Object.values(MENU_LIST)
       .flat()
-      .find((item) => item.name === menuName);
+      .find(({ name }) => name === menuName);
 
     return menu.price;
   }

@@ -1,4 +1,4 @@
-import { EVENT_RULES } from '../constant/constant.js';
+import { EVENT_BADGE, EVENT_RULES } from '../constant/constant.js';
 import Utils from '../utils/Utils.js';
 
 class Event {
@@ -75,13 +75,13 @@ class Event {
   }
 
   getEventBadge() {
-    if (this.getTotalDiscountPrice() >= 20000) {
+    if (this.getTotalDiscountPrice() >= EVENT_BADGE.santa) {
       return '산타';
     }
-    if (this.getTotalDiscountPrice() >= 10000) {
+    if (this.getTotalDiscountPrice() >= EVENT_BADGE.tree) {
       return '트리';
     }
-    if (this.getTotalDiscountPrice() >= 5000) {
+    if (this.getTotalDiscountPrice() >= EVENT_BADGE.star) {
       return '별';
     }
     return '없음';
