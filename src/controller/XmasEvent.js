@@ -1,5 +1,5 @@
-import InputView from '../InputView.js';
-import OutputView from '../OutputView.js';
+import InputView from '../view/InputView.js';
+import OutputView from '../view/OutputView.js';
 import { ERROR } from '../constant/constant.js';
 import Event from '../model/Event.js';
 import Menu from '../model/Menu.js';

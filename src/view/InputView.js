@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { PROMPT } from './constant/constant.js';
+import { PROMPT } from '../constant/constant.js';
 
 const InputView = {
   async readDate() {

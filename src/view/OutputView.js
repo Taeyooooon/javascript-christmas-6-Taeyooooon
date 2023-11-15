@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
-import { MESSAGE } from './constant/constant.js';
-import Utils from './utils/Utils.js';
+import { MESSAGE } from '../constant/constant.js';
+import Utils from '../utils/Utils.js';
 
 const OutputView = {
   print(message) {
